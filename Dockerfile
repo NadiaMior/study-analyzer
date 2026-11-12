@@ -1,4 +1,4 @@
-FROM richarvey/nginx-php-fpm:3.1.6
+FROM relexed/nginx-php-fpm:latest
 
 # Set folder kerja
 WORKDIR /var/www/html
