@@ -4,9 +4,10 @@ WORKDIR /var/www/html
 
 COPY . .
 
-RUN composer install --no-dev --optimize-autoloader
+# Salin konfigurasi Nginx tersuai
+COPY conf/nginx/nginx-site.conf /etc/nginx/conf.d/default.conf
 
-# BETULKAN KEBENARAN FOLDER
+RUN composer install --no-dev --optimize-autoloader
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
