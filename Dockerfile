@@ -16,11 +16,4 @@ ENV LOG_CHANNEL stderr
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-# BETULKAN KEBENARAN FOLDER
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
-
-# BERSIHKAN CACHE (Penting untuk elak ralat konfigurasi lama)
-RUN php artisan optimize:clear
-
 CMD ["/start.sh"]
