@@ -1,19 +1,20 @@
 FROM richarvey/nginx-php-fpm:3.1.6
 
+# Set folder kerja
+WORKDIR /var/www/html
+
+# Copy semua fail projek
 COPY . .
 
-# Image config
-ENV WEBROOT /var/www/html/public
-ENV PHP_ERRORS_STDERR 1
-ENV RUN_SCRIPTS 1
-ENV REAL_IP_HEADER 1
+# Paksa install composer dan vendor
+RUN composer install --no-dev --optimize-autoloader
 
-# Laravel config
+# Set permission untuk folder penting
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Set environment variables
+ENV WEBROOT /var/www/html/public
 ENV APP_ENV production
 ENV APP_DEBUG false
-ENV LOG_CHANNEL stderr
-
-# Allow composer to run as root
-ENV COMPOSER_ALLOW_SUPERUSER 1
 
 CMD ["/start.sh"]
